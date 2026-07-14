@@ -11,8 +11,8 @@ let index = 0;
 let gap = parseFloat(getComputedStyle(carouselTrack).gap);
 let slideWidth = carouselItems[0].getBoundingClientRect().width;
 let totalSlideWidth = slideWidth + gap;
+let promosectionTimer = document.querySelector(".promo-section__offer--timer");
 
-//hambugger menu 
 menu.addEventListener("click",function(){
 menu.classList.toggle("active");
 navbar.classList.toggle("open");
@@ -36,7 +36,6 @@ function updateBtn (index){
 }
 
 
-// testimonial carousel
 testimonialSection.addEventListener("click",(e)=>{
     if (e.target.matches(".btn--right")){
         index = (index + 1) % carouselItems.length;
@@ -55,7 +54,7 @@ testimonialSection.addEventListener("click",(e)=>{
     updateCarousel(id);
 })
 
-// smooth scrolling
+
 navbar.addEventListener("click",function(e){
     e.preventDefault();
   const id = e.target.getAttribute("href");
@@ -88,6 +87,7 @@ const observerNavbar = new IntersectionObserver((entries)=>{
   rootMargin:`-${navHeight}px`,
 });
 observerNavbar.observe(heroSection);
+
 
 const observerImg = new IntersectionObserver((entries)=>{
   entries.forEach((entry)=>{
@@ -362,3 +362,61 @@ carouselTrack.addEventListener("pointermove",drag);
 
 carouselTrack.addEventListener("pointerup",endDrag);
 carouselTrack.addEventListener("pointercancel",endDrag);
+
+
+const promoStart = new Date();
+promoStart.setMinutes(promoStart.getMinutes()+1);
+const promoStartTime = promoStart.getTime();
+const savedPromoStartTime = localStorage.getItem("promoStartTime");
+let getSavedPromoStartTime = +savedPromoStartTime || promoStartTime;
+if (!savedPromoStartTime){
+  localStorage.setItem("promostartTime",promoStartTime);
+}
+
+const promoEnd = new Date(promoStart);
+promoEnd.setMonth(promoEnd.getMonth()+1);
+const promoEndTime = promoEnd.getTime();
+const savedPromoEndTime = localStorage.getItem("promoEndTime");
+let getSavedPromoEndTime = +savedPromoEndTime || promoEndTime;
+if (!savedPromoEndTime){
+  localStorage.setItem("promoEndTime",promoEndTime);
+}
+
+function createNewPromo (){
+const newPromoStart = new Date();
+console.log(newPromoStart);
+newPromoStart.setMinutes(newPromoStart.getMinutes()+1);
+const newPromoStartTime = newPromoStart.getTime();
+localStorage.setItem("promoStartTime",newPromoStartTime);
+getSavedPromoStartTime = newPromoStartTime;
+
+const newPromoEnd = new Date(newPromoStart);
+newPromoEnd.setMonth(newPromoEnd.getMonth()+1);
+const newPromoEndTime = newPromoEnd.getTime();
+localStorage.setItem("promoEndTime",newPromoEndTime);
+getSavedPromoEndTime = newPromoEndTime;
+}
+const promoEndDuration = 10*1000;
+function countdown(){
+let currentDate =  new Date();
+let currentTime = currentDate.getTime();
+let difference = getSavedPromoEndTime-currentTime;
+const days = String(Math.floor(difference/(24*60*60*1000))).padStart(2,"0");
+const hour = String(Math.floor(difference/(60*60*1000)) % 24).padStart(2,"0");
+const minute = String(Math.floor(difference/(60*1000)) % 60).padStart(2,"0");
+const second = String(Math.floor(difference/1000) % 60).padStart(2,"0");
+const display = `${days}d : ${hour}h : ${minute}m : ${second}s`;
+if (currentTime < getSavedPromoStartTime){
+promosectionTimer.textContent = "Flash sales start soon 🔥";
+}else if (currentTime >= getSavedPromoStartTime && currentTime < getSavedPromoEndTime){
+  promosectionTimer.textContent = display;
+}else if (currentTime <= getSavedPromoEndTime + promoEndDuration){
+  promosectionTimer.textContent = "Flash sales end ❌";
+}else{
+  createNewPromo();
+}
+}
+
+countdown();
+
+setInterval(countdown,1000);
