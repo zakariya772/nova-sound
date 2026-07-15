@@ -61,7 +61,6 @@ main {
 .header__menu-toggle {
     width: 100%;
     height: .3rem;
-    background-color: #212529;
     display: block;
     transition: transform .3s ease;
     position: absolute;
@@ -1417,4 +1416,9 @@ animation: pulse 2s ease-out infinite;
     .footer-section__item--contact {
         flex-direction: row;
     }
+}
+@media(prefers-color-scheme: dark){
+ body{
+    background-color: #000;
+ }   
 }
