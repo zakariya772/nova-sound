@@ -370,7 +370,7 @@ const promoStartTime = promoStart.getTime();
 const savedPromoStartTime = localStorage.getItem("promoStartTime");
 let getSavedPromoStartTime = +savedPromoStartTime || promoStartTime;
 if (!savedPromoStartTime){
-  localStorage.setItem("promostartTime",promoStartTime);
+  localStorage.setItem("promoStartTime",promoStartTime);
 }
 
 const promoEnd = new Date(promoStart);
@@ -396,7 +396,8 @@ const newPromoEndTime = newPromoEnd.getTime();
 localStorage.setItem("promoEndTime",newPromoEndTime);
 getSavedPromoEndTime = newPromoEndTime;
 }
-const promoEndDuration = 10*1000;
+
+const timeBeforeNextPromo = 10*1000;
 function countdown(){
 let currentDate =  new Date();
 let currentTime = currentDate.getTime();
@@ -410,7 +411,7 @@ if (currentTime < getSavedPromoStartTime){
 promosectionTimer.textContent = "Flash sales start soon 🔥";
 }else if (currentTime >= getSavedPromoStartTime && currentTime < getSavedPromoEndTime){
   promosectionTimer.textContent = display;
-}else if (currentTime <= getSavedPromoEndTime + promoEndDuration){
+}else if (currentTime <= getSavedPromoEndTime + timeBeforeNextPromo){
   promosectionTimer.textContent = "Flash sales end ❌";
 }else{
   createNewPromo();
