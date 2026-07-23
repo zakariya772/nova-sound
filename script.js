@@ -62,10 +62,12 @@ navbar.addEventListener("click",function(e){
   navbar.classList.remove("open");
   menu.classList.remove("active");
   overlay.classList.remove("show");
-  document.querySelector(id).scrollIntoView({
+  if(id){
+      document.querySelector(id).scrollIntoView({
     behavior:"smooth",
     block:"start",
-  })
+  }) 
+  }                  
 })
 
 const heroSection = document.querySelector(".hero-section");
@@ -421,3 +423,23 @@ promosectionTimer.textContent = "Flash sales start soon 🔥";
 countdown();
 
 setInterval(countdown,1000);
+
+const html = document.documentElement;
+const darkmodeBtn = document.querySelector(".dark-btn");
+const darkmodeBtnIcon = document.querySelector(".dark-btn__icon");
+darkmodeBtn.addEventListener("click",()=>{
+  darkmodeBtn.classList.toggle("dark");
+  const html = document.documentElement;
+  const theme = html.dataset.theme === "light" ? "dark" : "light";
+  html.dataset.theme = theme;
+  localStorage.setItem("theme",theme); 
+})
+
+const savedTheme = localStorage.getItem("theme");
+console.log(savedTheme);
+if (savedTheme){
+  html.dataset.theme = savedTheme;
+}else{
+  html.dataset.theme = "light";
+}
+
