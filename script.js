@@ -430,7 +430,7 @@ const darkmodeBtnIcon = document.querySelector(".dark-btn__icon");
 darkmodeBtn.addEventListener("click",()=>{
   darkmodeBtn.classList.toggle("dark");
   const html = document.documentElement;
-  const theme = html.dataset.theme === "light" ? "dark" : "light";
+  const theme = html.dataset.theme === "dark" ? "light" : "dark";
   html.dataset.theme = theme;
   localStorage.setItem("theme",theme); 
 })
@@ -440,8 +440,9 @@ console.log(savedTheme);
 if (savedTheme){
   html.dataset.theme = savedTheme;
 }else{
-  html.dataset.theme = "light";
+  html.dataset.theme = "dark";
 }
 
 const preferDarkTheme = window.matchMedia("(prefers-color-theme: dark)").matches;
+console.log(preferDarkTheme);
 html.dataset.theme = preferDarkTheme ? "dark" : "light";
