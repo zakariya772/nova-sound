@@ -63,7 +63,7 @@ html {
     --color-contact-bg: #212121;
 }
 
-html[data-theme="dark"] {
+html[data-theme = "dark"] {
     color-scheme: dark;
    --color-bg: #0f172a;
    --color-text: #ffffff;
@@ -72,7 +72,7 @@ html[data-theme="dark"] {
     --color-btn-text:var(--color-general-text);
 }
 
-html[data-theme="light"] {
+html[data-theme = "light"]{
     color-scheme: light;
 };
 
