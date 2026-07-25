@@ -1454,7 +1454,7 @@ section {
 
 @media(max-width:39em) {
     .stats-section__item:not(:last-of-type) {
-        border-bottom: solid 1px;
+        border-bottom: solid 1px var(--color-border-secondary);
         border-right: 0;
     }
 }
