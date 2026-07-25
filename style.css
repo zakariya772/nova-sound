@@ -805,6 +805,10 @@ section {
     gap: 2rem;
 }
 
+.stats-section__icon{
+    color: var(--color-general-text);
+}
+
 .stats-section__item {
     display: flex;
     align-items: center;
@@ -900,7 +904,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
-    border: solid 2px var(--color-primary-text);
+    border: solid 1px var(--color-primary-text);
     border-radius: 9px;
     transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
     justify-content: center;
