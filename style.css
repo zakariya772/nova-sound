@@ -61,9 +61,14 @@ html {
     /* contact */
     --color-contact-bg:#212121;
 }
-[data-theme="dark"]{
+html[data-theme="dark"]{
         --color-bg:#0f172a;
+        --color-text:#ffff;
+        color-scheme: dark;
     }
+html[data-theme="light"]{
+    color-scheme: light;
+}
 *,
 *::before,
 *::after {
@@ -631,6 +636,7 @@ section {
     flex-direction: column;
     gap: 4rem;
     padding: 2rem;
+    color: var(--color-text);
 }
 
 .design-section__text {
@@ -847,6 +853,7 @@ letter-spacing: 1px;
     font-size: 2.4rem;
     letter-spacing: 1.2px;
     text-align: center;
+    color: var(--color-text);
 }
 
 .testimonial-section__track {
@@ -1112,7 +1119,7 @@ letter-spacing: 1px;
 
 .footer-section {
     width: 100%;
-    background-color: var(--color-text);
+    background-color: var(--color-secondary-bg);
 }
 
 .footer-section__container {
