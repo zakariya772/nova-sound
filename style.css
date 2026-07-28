@@ -1,8 +1,6 @@
 html {
     font-size: 62.5%;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 :root {
@@ -87,11 +85,6 @@ html[data-theme = "light"]{
 body{
     max-width: 100%;
 }
-.app{
-    max-width: 48rem;
-    margin: 0 auto;
-    position: relative;
-}
 .header,
 .nav-bar {
     font-family: "poppins", sans-serif;
@@ -99,7 +92,9 @@ body{
 
 main {
     font-family: "inter", sans-serif;
-    overflow-x: hidden;
+}
+body{
+        overflow-x: hidden;
 }
 
 
