@@ -443,6 +443,6 @@ console.log(savedTheme);
 if (savedTheme){
   html.dataset.theme = savedTheme;
 }else{
-const preferDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-html.dataset.theme = preferDarkTheme ? "dark" : "light";
+const preferDarkTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+html.dataset.theme = preferDarkTheme ? "light" : "dark";
 }
