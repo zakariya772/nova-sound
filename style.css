@@ -15,6 +15,12 @@ html,body{
     --color-secondary-text: #ffffff;
     --color-tetiary-text: #adb5bd;
 
+    /* section-bg */
+    --color-hero-bg:var(--color-secondary-bg);
+    --color-design-bg:var(--color-bg);
+    --color-feature-bg:var(--color-secondary-bg);
+    --color-testimonial-bg:var(--color-bg);
+    --color-promo-bg:var(--color-bg);
     /* navigation */
     --color-nav-bg: #000;
     --color-nav-text: #ffffff;
@@ -37,6 +43,8 @@ html,body{
     /* card */
     --color-card-bg: #141313b7;
     --color-card-text: #ab967c;
+    --color-card-secondary-bg:var(--color-primary-bright);
+     --color-testimonial-card-bg:var(--color-secondary-bright);
 
     /* stat */
     --color-stat-bg: var(--color-secondary-bright);
@@ -78,6 +86,12 @@ html[data-theme = "dark"] {
     --color-primary-text: #9FD3FF;
   --color-nav-hover: var(--color-primary);
 
+   --color-hero-bg:#090909;
+   --color-design-bg:#192747;
+   --color-feature-bg:#101827;
+   --color-testimonial-bg:#192747;
+   --color-promo-bg:#101827;
+
   /* Gradient */
   --color-transition: linear-gradient(
     120deg,
@@ -90,6 +104,8 @@ html[data-theme = "dark"] {
 
   --color-card-bg: #2A4170;
   --color-card-text: #D6E0F5;
+  --color-card-secondary-bg:var(--color-card-bg);
+  --color-testimonial-card-bg:var(--color-card-bg);
 }
 
 html[data-theme = "light"]{
@@ -191,8 +207,8 @@ body{
 
 .header.header-scroll {
     background-color: var(--color-nav-transparency);
-    backdrop-filter: blur(8px);
 }
+
 
 .overlay {
     opacity: 0;
@@ -384,7 +400,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: clamp(3rem, 8vh, 7rem);
-    background-color: var(--color-secondary-bg);
+    background-color: var(--color-hero-bg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -617,7 +633,7 @@ section {
 .design-section {
     min-height: 100vh;
     width: 100%;
-    background-color: var(--color-bg);
+    background-color: var(--color-design-bg);
 }
 
 .design-section__container {
@@ -642,7 +658,7 @@ section {
 
 .design-section__gallery-big,
 .design-section__gallery-small {
-    background-color: var(--color-primary-bright);
+    background-color: var(--color-card-secondary-bg);
     border-radius: 9px;
 }
 
@@ -721,7 +737,7 @@ section {
 }
 
 .features-section {
-    background-color: var(--color-secondary-bg);
+    background-color: var(--color-feature-bg);
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
@@ -857,7 +873,7 @@ section {
 
 .testimonial-section {
     min-height: 100vh;
-    background-color: var(--color-bg);
+    background-color: var(--color-testimonial-bg);
 }
 
 .testimonial-section__container {
@@ -911,10 +927,11 @@ section {
     flex: 0 0 100%;
     padding-block: clamp(2.4rem, 3vw, 4.8rem);
     padding-inline: clamp(2.4rem, 5vw, 6.4rem);
-    background-color: var(--color-secondary-bright);
+    background-color: var(--color-testimonial-card-bg);
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
+    color: var(--color-text);
     border: solid 1px var(--color-primary-text);
     border-radius: 9px;
     transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
@@ -1027,7 +1044,7 @@ section {
 
 /* promo section */
 .promo-section {
-    background-color: var(--color-bg);
+    background-color: var(--color-promo-bg);
 }
 
 .promo-section__container {
