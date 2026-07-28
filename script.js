@@ -90,6 +90,9 @@ const observerNavbar = new IntersectionObserver((entries)=>{
 });
 observerNavbar.observe(heroSection);
 
+if (overlay.classList.contains("show")){
+  header.classList.remove("header-scroll");
+}
 
 const observerImg = new IntersectionObserver((entries)=>{
   entries.forEach((entry)=>{

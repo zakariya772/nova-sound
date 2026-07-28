@@ -173,9 +173,12 @@ body{
 
 .header.header-scroll {
     background-color: var(--color-nav-transparency);
-    box-shadow: 0 4px 20px var(--color-nav-shadow);
+    backdrop-filter: blur(8px);
 }
 
+.overlay:has(.show).header.header-scroll{
+background-color: transparent;
+}
 .overlay {
     opacity: 0;
     visibility: hidden;
@@ -183,6 +186,7 @@ body{
     position:fixed;
     inset: 0;
 }
+
 
 .show {
     opacity: 1;
