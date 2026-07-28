@@ -67,11 +67,29 @@ html,body{
 
 html[data-theme = "dark"] {
     color-scheme: dark;
-   --color-bg: #0f172a;
+   --color-bg: #192747;
    --color-text: #ffffff;
    --color-general-text:#000;
-   --color-secondary-text:#ffffff;
+   --color-secondary-text:#C8D5F0;
     --color-btn-text:var(--color-general-text);
+    --color-primary: #4DA3FF;
+    --color-primary-bright: #7BC3FF;
+  --color-secondary-bright: #DCEEFF;
+    --color-primary-text: #9FD3FF;
+  --color-nav-hover: var(--color-primary);
+
+  /* Gradient */
+  --color-transition: linear-gradient(
+    120deg,
+    #4DA3FF 0%,
+    #7BC3FF 25%,
+    #DCEEFF 50%,
+    #7BC3FF 75%,
+    #4DA3FF 100%
+  );
+
+  --color-card-bg: #2A4170;
+  --color-card-text: #D6E0F5;
 }
 
 html[data-theme = "light"]{
@@ -176,9 +194,6 @@ body{
     backdrop-filter: blur(8px);
 }
 
-.overlay:has(.show).header.header-scroll{
-background-color: transparent;
-}
 .overlay {
     opacity: 0;
     visibility: hidden;
