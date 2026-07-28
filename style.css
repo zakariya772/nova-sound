@@ -55,7 +55,7 @@ html,body{
     --color-btn-hover: #f5a96d;
     --color-btn-navigate-primary: #dee2e6;
     --color-btn-navigate-secondary: #a9abaf;
-
+     --color-testimonial-icon:var(--color-primary-text);
 
     /* icon */
     --color-icon-primary: var(--color-secondary-text);
@@ -78,7 +78,8 @@ html[data-theme = "dark"] {
    --color-bg: #192747;
    --color-text: #ffffff;
    --color-general-text:#000;
-   --color-secondary-text:#C8D5F0;
+   --color-tetiary-text:#CBD5E1;
+   --color-secondary-text:#F8FAFC;;
     --color-btn-text:var(--color-general-text);
     --color-primary: #4DA3FF;
     --color-primary-bright: #7BC3FF;
@@ -91,7 +92,6 @@ html[data-theme = "dark"] {
    --color-feature-bg:#101827;
    --color-testimonial-bg:#192747;
    --color-promo-bg:#101827;
-
   /* Gradient */
   --color-transition: linear-gradient(
     120deg,
@@ -102,10 +102,19 @@ html[data-theme = "dark"] {
     #4DA3FF 100%
   );
 
-  --color-card-bg: #2A4170;
+   --color-icon-primary: var(--color-secondary-text);
+    --color-icon-bg: rgba(77,163,255,.12);
+    --color-icon-social-bg: #343a40;
+    --color-icon-text: #6BB7FF;
+    --color-border: rgba(77,163,255,.2);
+
+  --color-card-bg: #30497C;
   --color-card-text: #D6E0F5;
   --color-card-secondary-bg:var(--color-card-bg);
   --color-testimonial-card-bg:var(--color-card-bg);
+ --color-testimonial-icon:#FFD166;
+ --color-stat-bg:#C5D8F2;
+  /* --color-stat-bg:#C8DCF5; */
 }
 
 html[data-theme = "light"]{
@@ -660,6 +669,7 @@ section {
 .design-section__gallery-small {
     background-color: var(--color-card-secondary-bg);
     border-radius: 9px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
 .design-section__gallery-img {
@@ -679,7 +689,7 @@ section {
 .design-section__content {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 5rem;
     padding: 2rem;
     color: var(--color-text);
 }
@@ -725,6 +735,7 @@ section {
     border-radius: 50%;
     background-color: var(--color-icon-bg);
     color: var(--color-icon-text);
+    border: 1px solid rgba(77,163,255,.2);
 }
 
 .design-section__feature-content--title {
@@ -947,7 +958,7 @@ section {
 }
 
 .testimonial-section__rate svg {
-    fill: var(--color-primary-text);
+    fill: var(--color-testimonial-icon);
     stroke: none;
 }
 
@@ -1056,6 +1067,7 @@ section {
     grid-auto-rows: 1fr;
     overflow: hidden;
     gap: 4rem;
+    box-shadow:0 0 30px rgba(77,163,255,.18);
 }
 
 .promo-section__content {
