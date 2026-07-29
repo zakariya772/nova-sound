@@ -3,8 +3,8 @@ html {
     box-sizing: border-box;
 }
 html,body{
-    padding: 0;
     margin: 0;
+    padding: 0;
     width: 100%;
 }
 :root {
@@ -589,7 +589,6 @@ section {
     color: var(--color-tetiary-text);
 }
 
-
 .hero-section__media .hero-section__image {
     width: 100%;
     height: auto;
@@ -793,6 +792,7 @@ section {
     max-width: 45rem;
     margin: auto;
     width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);;
 }
 
 .features-section__content {
@@ -905,7 +905,7 @@ section {
 
 .testimonial-section__carousel-container {
     overflow: hidden;
-    max-width: 100%;
+    width: 100%;
 }
 
 .testimonial-section__badge {
@@ -1285,8 +1285,8 @@ section {
 
 .footer-section__contact--btn {
     padding: 1.15rem 1.6rem;
-    background-color: #fabd8e;
-    color: var(--color-general-text);
+    background-color: var(--color-primary);
+    color: var(--color-btn-text);
     border-radius: 0 9px 9px 0;
     border: none;
 }
