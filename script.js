@@ -3,15 +3,18 @@ const menu = document.querySelector(".header__menu");
 const navbar = document.querySelector(".nav-bar");
 const overlay = document.querySelector(".overlay");
 const testimonialSection = document.querySelector(".testimonial-section");
-const carouselItems = document.querySelectorAll(".testimonial-section__item");
+const slides = document.querySelectorAll(".testimonial-section__item");
 const carouselTrack = document.querySelector(".testimonial-section__track");
 const sections = document.querySelectorAll("section");
 const btndot = document.querySelectorAll(".btn-dot");
-let index = 0;
-let gap = parseFloat(getComputedStyle(carouselTrack).gap);
-let slideWidth = carouselItems[0].getBoundingClientRect().width;
-let totalSlideWidth = slideWidth + gap;
 let promosectionTimer = document.querySelector(".promo-section__offer--timer");
+let currentIndex = 0;
+let startX = 0;
+let currentX = 0;
+let previousTranslate = 0;
+let currentTranslate = 0;
+let isDragging = false;
+
 
 menu.addEventListener("click",function(){
 menu.classList.toggle("active");
@@ -19,16 +22,56 @@ navbar.classList.toggle("open");
 overlay.classList.toggle("show");
 })
 
+init();
 
-function updateCarousel(index){
-        carouselTrack.style.transform = `translateX(-${index * totalSlideWidth}px)`;
+function init(){
+  render();
 }
 
+function getSlidePosition(){
+  return -slides[currentIndex].offsetLeft;
+}
+
+function incrementCurrentIndex(){
+  if (currentIndex < slides.length-1){
+    currentIndex++;
+  }else{
+    currentIndex = 0;
+  }
+}
+
+function decrementCurrentIndex(){
+  if (currentIndex > 0){
+    currentIndex--;
+  }else{
+    currentIndex = slides.length-1;
+  }
+}
+
+function updatePosition(){
+  currentTranslate = getSlidePosition();
+  previousTranslate = currentTranslate;
+}
+
+function next(){
+  incrementCurrentIndex();
+  updatePosition();
+  render();
+}
+
+function prev(){
+  decrementCurrentIndex();
+  updatePosition();
+  render();
+}
+
+function render(){
+carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
+}
 
 function inactiveBtn(){
     btndot.forEach(btn=>btn.classList.remove("active-btn"));
 }
-
 
 function updateBtn (index){
   inactiveBtn();
@@ -38,21 +81,61 @@ function updateBtn (index){
 
 testimonialSection.addEventListener("click",(e)=>{
     if (e.target.matches(".btn--right")){
-        index = (index + 1) % carouselItems.length;
-        updateCarousel(index);
-        updateBtn(index);
+      next();
     }
     if (e.target.matches(".btn--left")){
-        index = (index-1+carouselItems.length) % carouselItems.length;
-         updateCarousel(index);
-         updateBtn(index);
+    prev();
     }
+
    const btn = e.target.closest(".btn-dot");
    if (!btn) return;
     const id = Number(btn.dataset.id);
-    updateBtn(id);
-    updateCarousel(id);
+    currentIndex = id;
+    updateBtn(currentIndex);
+    updatePosition();
+    render();
 })
+
+function startDrag(e){
+isDragging = true;
+startX = e.clientX;
+carouselTrack.style.transition = "none";
+carouselTrack.setPointerCapture(e.pointerId);
+}
+function drag(e){
+  if(!isDragging) return;
+  currentX = e.clientX;
+  const moved = currentX - startX;
+  currentTranslate = previousTranslate + moved;
+  render();
+}
+
+function endDrag(e){
+  isDragging = false;
+  let moveDistance = currentTranslate - previousTranslate;
+  let getThresold = 100;
+  carouselTrack.style.transition = "transform .8s cubic-bezier(0.22, 1, 0.36, 1)";
+  if (moveDistance < -getThresold){
+    incrementCurrentIndex();
+  }else if (moveDistance > getThresold){
+    decrementCurrentIndex();
+  }
+  updateBtn(currentIndex);
+  updatePosition();
+  render();
+  carouselTrack.releasePointerCapture(e.pointerId);
+}
+
+window.addEventListener("resize",()=>{
+  updatePosition();
+})
+carouselTrack.addEventListener("pointerdown",startDrag);
+
+carouselTrack.addEventListener("pointermove",drag);
+
+carouselTrack.addEventListener("pointerup",endDrag);
+carouselTrack.addEventListener("pointercancel",endDrag);
+
 
 
 navbar.addEventListener("click",function(e){
@@ -285,7 +368,6 @@ function updateCounter(counter){
   console.log(startTime);
   function update(currentTime){
     const elapsed = currentTime-startTime;
-    console.log(elapsed);
     const progress = Math.min(elapsed/duration,1);
     console.log(progress);
     const result = Math.floor(progress * target);
@@ -312,61 +394,6 @@ const observeCounter = new IntersectionObserver((entries)=>{
 counters.forEach(element=>{
   observeCounter.observe(element);
 });
-
-let startX = 0;
-let currentX = 0;
-let previousTranslate = 0;
-let currentTranslate = 0;
-let isDragging = false;
-let currentIndex = 0;
-function startDrag(e){
-isDragging = true;
-  startX = e.clientX;
-  carouselTrack.style.transition = "none";
-  carouselTrack.classList.add("dragging");
-  carouselTrack.setPointerCapture(e.pointerId);
-}
-function drag(e){
-  if(!isDragging) return;
-  currentX = e.clientX;
-  console.log(currentX,"currentX")
-  let moved = currentX - startX;
-  currentTranslate = previousTranslate + moved;
-  carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-}
-
-function endDrag(e){
-    if(!isDragging) return;
-  isDragging = false;
-   carouselTrack.classList.remove("dragging");
-  let movedBy = currentTranslate - previousTranslate;
-  if (movedBy < -50 && currentIndex < carouselItems.length-1){
-    currentIndex++;
-  }else if (movedBy > 50 && currentIndex > 0){
-    currentIndex--;
-  }
-  updateBtn(currentIndex);
-  currentTranslate = -currentIndex * totalSlideWidth;
-  previousTranslate = currentTranslate;
-  carouselTrack.style.transition = "transform .8s cubic-bezier(0.22, 1, 0.36, 1)";
-  carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-   carouselTrack.releasePointerCapture(e.pointerId);
-}
-
-window.addEventListener("resize",()=>{
-slideWidth = carouselItems[0].getBoundingClientRect().width;
-gap = parseFloat(getComputedStyle(carouselTrack).gap);
-totalSlideWidth = slideWidth + gap;
-previousTranslate  = -currentIndex * totalSlideWidth;
-currentTranslate = previousTranslate;
-carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-})
-carouselTrack.addEventListener("pointerdown",startDrag);
-
-carouselTrack.addEventListener("pointermove",drag);
-
-carouselTrack.addEventListener("pointerup",endDrag);
-carouselTrack.addEventListener("pointercancel",endDrag);
 
 
 const promoStart = new Date();
