@@ -946,6 +946,10 @@ section {
     gap:2.4rem;
 } 
 
+.testimonial-section__rate svg{
+     fill: var(--color-testimonial-icon);
+    stroke: none;
+}
 
 
 
