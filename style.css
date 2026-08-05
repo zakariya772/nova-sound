@@ -919,6 +919,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 4.8rem;
+    /* color: var(--color-general-text); */
 }
 .testimonial-section__carousel-container{
     overflow: hidden;
@@ -937,7 +938,7 @@ section {
 .testimonial-section__item{
     flex:0 0 100%;
     background-color: var(--color-testimonial-card-bg);
-    border: solid 2px var(--color-primary-text);
+    /* border: solid 2px var(--color-primary-text); */
     border-radius: 9px;
     text-align: center;
     padding: 2.4rem;
@@ -950,11 +951,10 @@ section {
      fill: var(--color-testimonial-icon);
     stroke: none;
 }
-
-
-
-
-
+.testimonial-section__item--description{
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+}
 
 
 
