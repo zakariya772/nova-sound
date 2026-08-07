@@ -475,3 +475,11 @@ html.dataset.theme = preferDarkTheme ? "light" : "dark";
 }
 
 console.log(getComputedStyle(slides[0]).boxSizing);
+
+console.table({
+    viewport: window.innerWidth,
+    container: document.querySelector(".testimonial-section__carousel-container").offsetWidth,
+    track: carouselTrack.offsetWidth,
+    slide: slides[0].offsetWidth,
+    offsetLeft: slides[0].offsetLeft
+});
